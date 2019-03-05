@@ -92,10 +92,16 @@ class MainViewModel(private val repository: Repository,
 
         }
 
-        val dataField: DataFields = DataFields(key, total_volume, lowestQuarter)
+
+
+        val dataField: DataFields = DataFields(key, total_volume, lowestQuarter, checkFirstQuarter(lowestQuarter))
 
         dataFields.add(dataField)
     }
+
+    private fun checkFirstQuarter(check:String):Boolean = check.split("-")[1] != "Q1"
+
+
 
 
     private fun generateApiCall():Single<ResponseData>{
