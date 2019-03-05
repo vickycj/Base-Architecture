@@ -21,7 +21,7 @@ class MainViewModel(private val repository: Repository,
 ):ViewModel() {
 
 
-    private val dataFields : List<DataFields> = ArrayList()
+    private val dataFields : MutableList<DataFields> = ArrayList()
 
     private val response: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -47,12 +47,47 @@ class MainViewModel(private val repository: Repository,
     }
 
     private fun modifyResponseData(responseData: ResponseData) {
-      var value :  Map<String,List<Record>> =    responseData.result.records.groupBy {
+      var groupedVal :  Map<String,List<Record>> =    responseData.result.records.groupBy {
                 it.quarter.split("-")[0]
             }
-        
+
+
+        addDataTODataField(groupedVal)
     }
 
+    private fun addDataTODataField(groupedVal:Map<String,List<Record>>) {
+        for ((key, value) in groupedVal) {
+            checkAndSumTheValue(key,value)
+        }
+
+    }
+
+    private fun checkAndSumTheValue( key:String, listCount: List<Record>){
+
+        var total_volume: Int = 0
+
+        var lowestQuarter: String = ""
+        var lowestVolume: Int = 0
+
+        listCount.forEach {
+            total_volume += it.volume_of_mobile_data.toInt()
+            if(lowestQuarter.isNullOrEmpty()){
+                lowestQuarter = it.quarter
+                lowestVolume = it.volume_of_mobile_data.toInt()
+            }else{
+                if(it.volume_of_mobile_data.toInt() < lowestVolume){
+                    lowestVolume = it.volume_of_mobile_data.toInt()
+                    lowestQuarter = it.quarter
+                }
+            }
+
+
+        }
+
+        val dataField: DataFields = DataFields(key, total_volume, lowestQuarter)
+
+        dataFields.add(dataField)
+    }
 
 
     private fun generateApiCall():Single<ResponseData>{
