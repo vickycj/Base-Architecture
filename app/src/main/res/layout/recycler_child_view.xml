@@ -22,6 +22,7 @@
 
 
         <TextView
+                android:id="@+id/total_view"
                 tools:text="0.43432423"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
