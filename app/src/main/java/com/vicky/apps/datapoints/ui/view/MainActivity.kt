@@ -1,6 +1,7 @@
 package com.vicky.apps.datapoints.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -48,7 +49,7 @@ class MainActivity : BaseActivity() {
 
 
     private fun successCallback(){
-
+        Log.d("checkkk", viewModel.getDataFields().toString())
     }
 
     private fun failureCallback(){

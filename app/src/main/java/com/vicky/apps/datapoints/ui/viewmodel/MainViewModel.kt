@@ -34,6 +34,8 @@ class MainViewModel(private val repository: Repository,
         this.compositeDisposable = compositeDisposable
     }
 
+    fun getDataFields(): MutableList<DataFields> = dataFields
+
     fun getDataFromRemote() {
 
         compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
@@ -60,23 +62,29 @@ class MainViewModel(private val repository: Repository,
             checkAndSumTheValue(key,value)
         }
 
+        updateTheValuesToUI();
+
+    }
+
+    private fun updateTheValuesToUI() {
+        response.postValue(true)
     }
 
     private fun checkAndSumTheValue( key:String, listCount: List<Record>){
 
-        var total_volume: Int = 0
+        var total_volume = 0.0
 
-        var lowestQuarter: String = ""
-        var lowestVolume: Int = 0
+        var lowestQuarter = ""
+        var lowestVolume = 0.0
 
         listCount.forEach {
-            total_volume += it.volume_of_mobile_data.toInt()
+            total_volume += it.volume_of_mobile_data.toDouble()
             if(lowestQuarter.isNullOrEmpty()){
                 lowestQuarter = it.quarter
-                lowestVolume = it.volume_of_mobile_data.toInt()
+                lowestVolume = it.volume_of_mobile_data.toDouble()
             }else{
-                if(it.volume_of_mobile_data.toInt() < lowestVolume){
-                    lowestVolume = it.volume_of_mobile_data.toInt()
+                if(it.volume_of_mobile_data.toDouble() < lowestVolume){
+                    lowestVolume = it.volume_of_mobile_data.toDouble()
                     lowestQuarter = it.quarter
                 }
             }
