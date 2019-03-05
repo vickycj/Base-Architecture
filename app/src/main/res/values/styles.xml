@@ -12,5 +12,8 @@
     <style name="ActivityTheme" parent="AppTheme"/>
 
 
+    <style name="TextStyle" parent="TextAppearance.AppCompat.Display1">
+
+    </style>
 
 </resources>
