@@ -2,7 +2,7 @@ package com.vicky.apps.datapoints.common
 
 import io.reactivex.*
 
-class SchedulerProvider(val io: Scheduler,val  mainThread: Scheduler?) {
+open class SchedulerProvider(val io: Scheduler, val  mainThread: Scheduler?) {
     fun <T> getSchedulersForObservable(): (Observable<T>) -> Observable<T> {
         return { observable: Observable<T> ->
             observable.subscribeOn(io)
