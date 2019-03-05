@@ -1,10 +1,14 @@
 package com.vicky.apps.datapoints.ui.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
 import com.vicky.apps.datapoints.ui.model.ResponseData
 import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import java.util.*
 
 
@@ -13,11 +17,32 @@ class MainViewModel(private val repository: Repository,
 ) {
 
 
+    private val response: MutableLiveData<Boolean> = MutableLiveData()
+
+    fun getSubscription():MutableLiveData<Boolean> = response
+
+    private lateinit var compositeDisposable: CompositeDisposable
 
 
-    fun getDataFromRemote(): Single<ResponseData> {
-      return   repository.getDataFromApi(createRequestParams())
-          .compose(schedulerProvider.getSchedulersForSingle())
+    fun setCompositeData(compositeDisposable: CompositeDisposable) {
+        this.compositeDisposable = compositeDisposable
+    }
+
+    fun getDataFromRemote() {
+
+        compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
+            Log.d("valuessss",it.toString())
+        }, onError = {
+            Log.d("valuessss",it.message)
+
+        } ))
+
+
+    }
+
+    private fun generateApiCall():Single<ResponseData>{
+        return repository.getDataFromApi(createRequestParams())
+            .compose(schedulerProvider.getSchedulersForSingle())
     }
 
 

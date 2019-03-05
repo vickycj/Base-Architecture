@@ -2,13 +2,15 @@ package com.vicky.apps.datapoints.ui.view
 
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.vicky.apps.datapoints.R
 import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(),LifecycleOwner {
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -19,19 +21,33 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
 
-        getDataFromRemote()
-    }
-
-    private fun getDataFromRemote() {
-
-
-
-        compositeDisposable.add(viewModel.getDataFromRemote().subscribeBy ( onSuccess = {
-            Log.d("valuessss",it.toString())
-        }, onError = {
-            Log.d("valuessss",it.message)
-
-        } ));
+        initializeValues()
 
     }
+
+    private fun initializeValues() {
+        viewModel.setCompositeData(compositeDisposable)
+
+        viewModel.getSubscription().observe(this, Observer {
+            if(it){
+                successCallback()
+            }else{
+                failureCallback()
+            }
+        })
+
+
+        viewModel.getDataFromRemote()
+    }
+
+
+    private fun successCallback(){
+
+    }
+
+    private fun failureCallback(){
+
+    }
+
+
 }
