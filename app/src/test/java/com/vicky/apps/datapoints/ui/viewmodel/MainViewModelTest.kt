@@ -43,7 +43,7 @@ class MainViewModelTest {
 
     @Test
     fun getFirstQuarter(){
-        assert(!viewModel.checkFirstQuarter("Q4"))
+        assert(!viewModel.checkFirstQuarter("2005-Q1"))
     }
 
 
