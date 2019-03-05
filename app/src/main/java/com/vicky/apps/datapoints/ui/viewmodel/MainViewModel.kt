@@ -2,6 +2,7 @@ package com.vicky.apps.datapoints.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
@@ -17,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class MainViewModel(private val repository: Repository,
                     private val schedulerProvider: SchedulerProvider
-) {
+):ViewModel() {
 
 
     private val dataFields : List<DataFields> = ArrayList()
@@ -49,9 +50,7 @@ class MainViewModel(private val repository: Repository,
       var value :  Map<String,List<Record>> =    responseData.result.records.groupBy {
                 it.quarter.split("-")[0]
             }
-
-
-        Log.d("mappp",value.toString())
+        
     }
 
 

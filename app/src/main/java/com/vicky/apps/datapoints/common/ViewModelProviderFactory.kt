@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vicky.apps.datapoints.data.remote.Repository
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
+import javax.inject.Inject
 
 
-class DataViewModelFactory(private val repository: Repository, private val schedulerProvider: SchedulerProvider) :
+class ViewModelProviderFactory @Inject constructor( var repository: Repository,  var schedulerProvider: SchedulerProvider) :
     ViewModelProvider.NewInstanceFactory() {
 
 

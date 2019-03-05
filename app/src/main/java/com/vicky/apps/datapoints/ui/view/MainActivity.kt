@@ -1,24 +1,27 @@
 package com.vicky.apps.datapoints.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.vicky.apps.datapoints.R
+import androidx.lifecycle.ViewModelProviders
 import com.vicky.apps.datapoints.base.BaseActivity
+import com.vicky.apps.datapoints.common.ViewModelProviderFactory
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(),LifecycleOwner {
+
+
+
+class MainActivity : BaseActivity() {
 
     @Inject
-    lateinit var viewModel: MainViewModel
+    lateinit var factory: ViewModelProviderFactory
 
+    private lateinit var viewModel:MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.vicky.apps.datapoints.R.layout.activity_main)
 
 
         initializeValues()
@@ -27,6 +30,7 @@ class MainActivity : BaseActivity(),LifecycleOwner {
 
     private fun initializeValues() {
 
+        viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
         viewModel.setCompositeData(compositeDisposable)
 
