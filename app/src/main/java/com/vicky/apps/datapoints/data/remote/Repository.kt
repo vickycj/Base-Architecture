@@ -8,6 +8,6 @@ import javax.inject.Singleton
 @Singleton
 class Repository @Inject constructor(private val apiService: ApiService) {
 
-    fun getDataFromApi(): Single<Objects> = apiService.getDataFromService()
+    fun getDataFromApi(params: Map<String,String>): Single<Objects> = apiService.getDataFromService(params)
 
 }
