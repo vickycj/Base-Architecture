@@ -26,6 +26,8 @@ class MainActivity : BaseActivity(),LifecycleOwner {
     }
 
     private fun initializeValues() {
+
+
         viewModel.setCompositeData(compositeDisposable)
 
         viewModel.getSubscription().observe(this, Observer {

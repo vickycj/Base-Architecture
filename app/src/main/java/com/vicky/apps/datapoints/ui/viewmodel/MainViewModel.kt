@@ -5,17 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
+import com.vicky.apps.datapoints.ui.model.DataFields
+import com.vicky.apps.datapoints.ui.model.Record
 import com.vicky.apps.datapoints.ui.model.ResponseData
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainViewModel(private val repository: Repository,
                     private val schedulerProvider: SchedulerProvider
 ) {
 
+
+    private val dataFields : List<DataFields> = ArrayList()
 
     private val response: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -31,7 +36,7 @@ class MainViewModel(private val repository: Repository,
     fun getDataFromRemote() {
 
         compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
-            Log.d("valuessss",it.toString())
+            modifyResponseData(it)
         }, onError = {
             Log.d("valuessss",it.message)
 
@@ -39,6 +44,17 @@ class MainViewModel(private val repository: Repository,
 
 
     }
+
+    private fun modifyResponseData(responseData: ResponseData) {
+      var value :  Map<String,List<Record>> =    responseData.result.records.groupBy {
+                it.quarter.split("-")[0]
+            }
+
+
+        Log.d("mappp",value.toString())
+    }
+
+
 
     private fun generateApiCall():Single<ResponseData>{
         return repository.getDataFromApi(createRequestParams())
