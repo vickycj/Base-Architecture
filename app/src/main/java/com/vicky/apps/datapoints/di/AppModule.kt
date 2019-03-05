@@ -8,6 +8,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vicky.apps.datapoints.base.NetworkConstant
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.ApiService
+import com.vicky.apps.datapoints.data.remote.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -66,6 +67,13 @@ class AppModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .build().create(ApiService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideRepository(apiService: ApiService): Repository{
+        return Repository(apiService)
     }
 
 }

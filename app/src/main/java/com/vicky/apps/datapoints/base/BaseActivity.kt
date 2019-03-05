@@ -9,9 +9,12 @@ import javax.inject.Inject
 import dagger.android.AndroidInjection
 import android.os.Bundle
 import androidx.annotation.Nullable
+import io.reactivex.disposables.CompositeDisposable
 
 
-class BaseActivity : AppCompatActivity(), HasFragmentInjector {
+ open class BaseActivity : AppCompatActivity(), HasFragmentInjector {
+
+    protected val compositeDisposable by lazy { CompositeDisposable() }
 
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
@@ -23,6 +26,14 @@ class BaseActivity : AppCompatActivity(), HasFragmentInjector {
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+    }
+
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+        compositeDisposable.dispose()
     }
 
 
