@@ -94,7 +94,7 @@ class MainViewModel(private val repository: Repository,
 
 
 
-        val dataField: DataFields = DataFields(key, total_volume, lowestQuarter, checkFirstQuarter(lowestQuarter))
+        val dataField = DataFields(key, String.format("%3f",total_volume), lowestQuarter, checkFirstQuarter(lowestQuarter))
 
         dataFields.add(dataField)
     }

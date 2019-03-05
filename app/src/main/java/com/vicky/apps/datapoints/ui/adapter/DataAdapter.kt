@@ -10,10 +10,10 @@ import com.vicky.apps.datapoints.R
 import com.vicky.apps.datapoints.ui.model.DataFields
 import kotlinx.android.synthetic.main.recycler_child_view.view.*
 
-class DataAdapter(var dataFields: List<DataFields>) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
+class DataAdapter(var dataFields: List<DataFields>, val listenerAdapter: RecyclerViewClickListenerAdapter) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.recycler_child_view,parent,false)
-        return DataViewHolder(v)
+        return DataViewHolder(v,listenerAdapter)
     }
 
     override fun getItemCount(): Int = dataFields.size
@@ -40,7 +40,7 @@ class DataAdapter(var dataFields: List<DataFields>) : RecyclerView.Adapter<DataA
 
 
 
-    class DataViewHolder(v:View): RecyclerView.ViewHolder(v),View.OnClickListener{
+    class DataViewHolder(v:View,val listenerAdapter: RecyclerViewClickListenerAdapter): RecyclerView.ViewHolder(v),View.OnClickListener{
 
         val year_view: TextView = v.year_tv
         val total_amount_view: TextView = v.total_view

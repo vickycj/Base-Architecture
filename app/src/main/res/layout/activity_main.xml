@@ -8,6 +8,7 @@
         tools:context=".ui.view.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/data_recycler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello World!"
