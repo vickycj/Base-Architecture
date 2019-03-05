@@ -3,6 +3,7 @@ package com.vicky.apps.datapoints.ui.viewmodel
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
+import com.vicky.apps.datapoints.ui.model.ResponseData
 import io.reactivex.Single
 import java.util.*
 
@@ -14,7 +15,7 @@ class MainViewModel(private val repository: Repository,
 
 
 
-    fun getDataFromRemote(): Single<Any> {
+    fun getDataFromRemote(): Single<ResponseData> {
       return   repository.getDataFromApi(createRequestParams())
           .compose(schedulerProvider.getSchedulersForSingle())
     }
