@@ -50,6 +50,10 @@ class MainViewModel(private val repository: Repository,
 
     }
 
+    fun setCompanyDetails(companyDetails: MutableList<CompanyDetails>){
+        this.companyDetails = companyDetails
+    }
+
 
     fun getCompanyDetails():List<CompanyDetails>{
         return companyDetails
@@ -89,7 +93,7 @@ class MainViewModel(private val repository: Repository,
             it.name.startsWith(textVal)
         }.toMutableList()
     }
-    
+
     fun findCSingleCompanyData(id:String):ResponseData?{
         return responseData.find {
             it._id == id

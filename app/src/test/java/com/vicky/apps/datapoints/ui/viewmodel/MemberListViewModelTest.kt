@@ -4,41 +4,33 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
-import com.vicky.apps.datapoints.ui.model.CompanyDetails
+import com.vicky.apps.datapoints.ui.model.Member
 import com.vicky.apps.datapoints.ui.model.ResponseData
-
-import io.reactivex.Single
-import io.reactivex.observers.TestObserver
 import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MainViewModelTest {
-
+class MemberListViewModelTest {
 
     @Mock
     lateinit var repository: Repository
 
     private val schedulerProvider = SchedulerProvider(Schedulers.trampoline(), Schedulers.trampoline())
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MemberListViewModel
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = MainViewModel(repository, schedulerProvider)
-    }
-
-    @After
-    fun tearDown() {
+        viewModel = MemberListViewModel(repository, schedulerProvider)
     }
 
 
@@ -52,64 +44,43 @@ class MainViewModelTest {
 
     }
 
-
-
-    @Test
-    fun getDataFromRemote() {
-
-        Mockito.`when`(repository.getDataFromApi()).thenReturn(Single.just(getObject()))
-
-        val testObserver = TestObserver<List<ResponseData>>()
-
-        viewModel.generateApiCall()
-            .subscribe(testObserver)
-
-        testObserver.assertNoErrors()
-        testObserver.assertValue { responseData -> responseData.size == 20 }
+    @After
+    fun tearDown() {
     }
 
     @Test
-    fun sortCompanyDataTest(){
+    fun sortByAge() {
         val responseData = getObject()
-        val companyDetails : MutableList<CompanyDetails> = ArrayList()
-        responseData.forEach {
-            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
-        }
-        viewModel.setCompanyDetails(companyDetails)
+        val member:List<Member> = responseData[0].members
 
+        viewModel.setMemberData(member)
 
-        viewModel.sortCompanyData()
+        viewModel.sortByAge()
 
-        assert(viewModel.getCompanyDetails()[0].name.startsWith("A"))
-    }
-
-
-    @Test
-    fun filterCompanyDetailsTest(){
-        val responseData = getObject()
-        val companyDetails : MutableList<CompanyDetails> = ArrayList()
-        responseData.forEach {
-            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
-        }
-        viewModel.setCompanyDetails(companyDetails)
-
-        assert(viewModel.filterCompany("X")[0].name.startsWith("X"))
-
-
+        assert(viewModel.getMemberData()[0].age == 24)
     }
 
     @Test
-    fun findCompanyDetailsTest(){
-        val responseData = getObject()
-        val companyDetails : MutableList<CompanyDetails> = ArrayList()
-        responseData.forEach {
-            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
-        }
-        viewModel.setCompanyDetails(companyDetails)
+    fun sortByName() {
 
-        assert(viewModel.findCSingleCompanyData("5c5bb5ce54a9c166bf1c5b82")!!.company == "GYNKO")
+        val responseData = getObject()
+        val member:List<Member> = responseData[0].members
+
+        viewModel.setMemberData(member)
+
+        viewModel.sortByName()
+
+        assert(viewModel.getMemberData()[0].name.first == "Heather")
     }
 
+    @Test
+    fun filterMember() {
+        val responseData = getObject()
+        val member:List<Member> = responseData[0].members
 
+        viewModel.setMemberData(member)
 
+        assert(viewModel.filterMember("H")[0].name.first == "Heather")
+
+    }
 }
