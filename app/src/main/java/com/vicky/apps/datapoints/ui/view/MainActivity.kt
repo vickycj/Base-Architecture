@@ -1,7 +1,6 @@
 package com.vicky.apps.datapoints.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,7 +10,6 @@ import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.common.ViewModelProviderFactory
 import com.vicky.apps.datapoints.ui.adapter.DataAdapter
 import com.vicky.apps.datapoints.ui.adapter.RecyclerViewClickListenerAdapter
-import com.vicky.apps.datapoints.ui.model.DataFields
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -46,8 +44,8 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
         recyclerView = data_recycler
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        val emptyValues = ArrayList<DataFields>()
-        adapter = DataAdapter(emptyValues, this)
+
+        adapter = DataAdapter( this)
         recyclerView.adapter = adapter
     }
 
@@ -71,9 +69,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
 
 
     private fun successCallback(){
-        Log.d("checkkk", viewModel.getDataFields().toString())
 
-        adapter.updateData(viewModel.getDataFields())
     }
 
     private fun failureCallback(){
