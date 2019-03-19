@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Club -HUB</string>
     <string name="image1">image1</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="vicky">Vicky</string>
+    <string name="newString">NEW</string>
+    <string name="spectrum">Spectrum</string>
+    <string name="spectrum_string">SPECTRUM</string>
 </resources>
