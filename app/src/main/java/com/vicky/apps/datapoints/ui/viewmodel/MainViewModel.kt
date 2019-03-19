@@ -27,6 +27,8 @@ class MainViewModel(private val repository: Repository,
 
     private lateinit var responseData:List<ResponseData>
 
+    private var companyDetails:MutableList<CompanyDetails> = ArrayList()
+    private var ascendingVal:Boolean = false
 
     fun setCompositeData(compositeDisposable: CompositeDisposable) {
         this.compositeDisposable = compositeDisposable
@@ -49,15 +51,13 @@ class MainViewModel(private val repository: Repository,
 
 
     fun getCompanyDetails():List<CompanyDetails>{
-        var companyDetails:MutableList<CompanyDetails> = ArrayList()
-        responseData.forEach {
-            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
-        }
-
         return companyDetails
     }
 
     private fun updateTheValuesToUI() {
+        responseData.forEach {
+            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
+        }
         response.postValue(true)
     }
 
@@ -65,6 +65,20 @@ class MainViewModel(private val repository: Repository,
     fun generateApiCall():Single<List<ResponseData>>{
         return repository.getDataFromApi()
             .compose(schedulerProvider.getSchedulersForSingle())
+    }
+
+    fun sortCompanyData(){
+         if(!ascendingVal){
+            companyDetails = ArrayList(companyDetails).sortedBy {
+                it.name
+            }.toMutableList()
+           ascendingVal= true
+        }else{
+            companyDetails = ArrayList(companyDetails).sortedByDescending {
+                it.name
+            }.toMutableList()
+             ascendingVal=  false
+        }
     }
 
 

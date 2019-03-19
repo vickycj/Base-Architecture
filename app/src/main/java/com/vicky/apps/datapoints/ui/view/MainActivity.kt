@@ -64,12 +64,22 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
             }
         })
 
+        sortCompany.setOnClickListener { v -> sortAndUpdateData() }
 
         viewModel.getDataFromRemote()
     }
 
+    private fun sortAndUpdateData() {
+        viewModel.sortCompanyData()
+        updateData()
+    }
+
 
     private fun successCallback(){
+        updateData()
+    }
+
+    private fun updateData(){
         adapter.updateData(viewModel.getCompanyDetails())
     }
 
