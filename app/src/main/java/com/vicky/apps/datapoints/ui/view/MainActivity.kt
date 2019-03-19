@@ -46,7 +46,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
         recyclerView.layoutManager = GridLayoutManager(this, 3)
 
 
-        adapter = DataAdapter( ArrayList(),this)
+        adapter = DataAdapter( ArrayList(),this,this)
         recyclerView.adapter = adapter
     }
 

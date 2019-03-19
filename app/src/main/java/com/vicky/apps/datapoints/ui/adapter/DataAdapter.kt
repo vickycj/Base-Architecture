@@ -1,5 +1,6 @@
 package com.vicky.apps.datapoints.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,10 @@ import com.squareup.picasso.Picasso
 import com.vicky.apps.datapoints.R
 import com.vicky.apps.datapoints.ui.model.CompanyDetails
 
-class DataAdapter(var companyDetails: List<CompanyDetails>,val listenerAdapter: RecyclerViewClickListenerAdapter) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
+
+class DataAdapter(var companyDetails: List<CompanyDetails>,val listenerAdapter: RecyclerViewClickListenerAdapter,val context: Context) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.recycler_child_view,parent,false)
         return DataViewHolder(v,listenerAdapter)
@@ -22,7 +26,10 @@ class DataAdapter(var companyDetails: List<CompanyDetails>,val listenerAdapter: 
 
         holder.companyName.text = companyDetails[position].name
 
-       // Picasso.get().load(companyDetails[position].logo).into(holder.logoImage)
+       Picasso.get().load("https://name").
+           placeholder(R.drawable.logo).
+           error(R.drawable.logo)
+           .into(holder.logoImage)
     }
 
     fun updateData(companyDetails: List<CompanyDetails>){
