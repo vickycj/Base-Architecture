@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vicky.apps.datapoints.base.BaseActivity
@@ -26,7 +27,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
     private lateinit var viewModel:MainViewModel
 
 
-   // private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: DataAdapter
 
@@ -35,18 +36,18 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
         setContentView(com.vicky.apps.datapoints.R.layout.activity_main)
 
 
-        //inilializingRecyclerView()
+        inilializingRecyclerView()
         initializeValues()
 
     }
 
     private fun inilializingRecyclerView() {
-       /* recyclerView = data_recycler
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        recyclerView = data_recycler
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
 
 
-        adapter = DataAdapter( this)
-        recyclerView.adapter = adapter*/
+        adapter = DataAdapter( ArrayList(),this)
+        recyclerView.adapter = adapter
     }
 
     private fun initializeValues() {
@@ -69,7 +70,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
 
 
     private fun successCallback(){
-
+        adapter.updateData(viewModel.getCompanyDetails())
     }
 
     private fun failureCallback(){

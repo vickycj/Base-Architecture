@@ -4,6 +4,5 @@
     <dimen name="DP_100">100dp</dimen>
     <dimen name="DP_16">16dp</dimen>
     <dimen name="DP_70">70dp</dimen>
-    <dimen name="DP_70">70dp</dimen>
     <dimen name="DP_80">80dp</dimen>
 </resources>

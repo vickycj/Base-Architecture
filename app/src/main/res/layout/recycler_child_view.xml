@@ -11,7 +11,7 @@
 
 
     <ImageView
-
+            android:src="@drawable/circle_image"
             android:layout_width="@dimen/DP_80"
             android:layout_height="@dimen/DP_80"
             app:layout_constraintStart_toStartOf="parent"

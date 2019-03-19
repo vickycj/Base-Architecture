@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
+import com.vicky.apps.datapoints.ui.model.CompanyDetails
 import com.vicky.apps.datapoints.ui.model.ResponseData
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -38,6 +39,7 @@ class MainViewModel(private val repository: Repository,
         compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
             this.responseData = it
             Log.d("responseData",responseData.size.toString())
+            updateTheValuesToUI()
         }, onError = {
             Log.d("valuessss",it.message)
         } ))
@@ -45,20 +47,19 @@ class MainViewModel(private val repository: Repository,
 
     }
 
-    private fun modifyResponseData() {
 
+    fun getCompanyDetails():List<CompanyDetails>{
+        var companyDetails:MutableList<CompanyDetails> = ArrayList()
+        responseData.forEach {
+            companyDetails.add(CompanyDetails(it._id, it.logo,it.company))
+        }
+
+        return companyDetails
     }
-
-
 
     private fun updateTheValuesToUI() {
         response.postValue(true)
     }
-
-
-
-
-
 
 
     fun generateApiCall():Single<List<ResponseData>>{
