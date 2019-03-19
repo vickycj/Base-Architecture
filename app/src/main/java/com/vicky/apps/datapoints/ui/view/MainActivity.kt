@@ -26,7 +26,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
     private lateinit var viewModel:MainViewModel
 
 
-    private lateinit var recyclerView: RecyclerView
+   // private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: DataAdapter
 
@@ -41,12 +41,12 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
     }
 
     private fun inilializingRecyclerView() {
-        recyclerView = data_recycler
+       /* recyclerView = data_recycler
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
 
         adapter = DataAdapter( this)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter*/
     }
 
     private fun initializeValues() {
