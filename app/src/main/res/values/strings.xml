@@ -11,4 +11,6 @@
     <string name="follow">FOLLOW</string>
     <string name="favourite">Favourite</string>
     <string name="members">Members</string>
+    <string name="age">Age</string>
+    <string name="name">Name</string>
 </resources>
