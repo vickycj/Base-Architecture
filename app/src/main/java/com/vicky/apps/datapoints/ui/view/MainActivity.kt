@@ -15,9 +15,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.SearchView
+import com.vicky.apps.datapoints.base.AppConstants
 
 import com.vicky.apps.datapoints.ui.model.CompanyDetails
 
@@ -115,7 +117,15 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
     }
 
      fun clicked(position: Int, companyDetail: CompanyDetails) {
-        Toast.makeText(this,"Clicked position $position ${companyDetail.name}",Toast.LENGTH_LONG).show()
+         val responseData = viewModel.findCSingleCompanyData(companyDetail.id)
+         if(responseData!= null){
+             val b = Bundle()
+             b.putParcelable(AppConstants.COMPANY_DATA,responseData)
+             val intent =Intent(this, MemberListActivity::class.java)
+             intent.putExtra(AppConstants.COMPANY_DATA_BUNDLE,b)
+             startActivity(intent)
+         }
+
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
