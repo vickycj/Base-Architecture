@@ -9,6 +9,6 @@ import javax.inject.Singleton
 @Singleton
 class Repository @Inject constructor(private val apiService: ApiService) {
 
-    fun getDataFromApi(): Single<ResponseData> = apiService.getDataFromService()
+    fun getDataFromApi(): Single<List<ResponseData>> = apiService.getDataFromService()
 
 }

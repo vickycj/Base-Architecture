@@ -24,7 +24,7 @@ class MainViewModel(private val repository: Repository,
 
     private lateinit var compositeDisposable: CompositeDisposable
 
-    private lateinit var responseData:ResponseData
+    private lateinit var responseData:List<ResponseData>
 
 
     fun setCompositeData(compositeDisposable: CompositeDisposable) {
@@ -37,7 +37,7 @@ class MainViewModel(private val repository: Repository,
 
         compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
             this.responseData = it
-            Log.d("responseData",responseData.members.size.toString())
+            Log.d("responseData",responseData.size.toString())
         }, onError = {
             Log.d("valuessss",it.message)
         } ))
@@ -61,7 +61,7 @@ class MainViewModel(private val repository: Repository,
 
 
 
-    fun generateApiCall():Single<ResponseData>{
+    fun generateApiCall():Single<List<ResponseData>>{
         return repository.getDataFromApi()
             .compose(schedulerProvider.getSchedulersForSingle())
     }

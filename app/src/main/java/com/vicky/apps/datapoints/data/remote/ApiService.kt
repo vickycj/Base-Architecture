@@ -8,5 +8,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("api/json/get/Vk-LhK44U")
-    fun getDataFromService(): Single<ResponseData>
+    fun getDataFromService(): Single<List<ResponseData>>
 }
