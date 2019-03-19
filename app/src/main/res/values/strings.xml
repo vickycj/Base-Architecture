@@ -8,4 +8,7 @@
     <string name="spectrum_string">SPECTRUM</string>
     <string name="search">Search</string>
     <string name="search_company">Search Company</string>
+    <string name="follow">FOLLOW</string>
+    <string name="favourite">Favourite</string>
+    <string name="members">Members</string>
 </resources>
