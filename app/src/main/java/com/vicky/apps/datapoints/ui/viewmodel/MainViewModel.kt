@@ -84,8 +84,9 @@ class MainViewModel(private val repository: Repository,
 
      fun filterCompany(text:String?): List<CompanyDetails>{
          if(text == null) return companyDetails
+         var textVal = text.toUpperCase()
         return ArrayList(companyDetails).filter {
-            it.name.startsWith(text.capitalize())
+            it.name.startsWith(textVal)
         }.toMutableList()
     }
 

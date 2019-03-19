@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.common.ViewModelProviderFactory
 import com.vicky.apps.datapoints.ui.adapter.DataAdapter
-import com.vicky.apps.datapoints.ui.adapter.RecyclerViewClickListenerAdapter
+
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -22,7 +22,7 @@ import android.widget.SearchView
 import com.vicky.apps.datapoints.ui.model.CompanyDetails
 
 
-class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter, SearchView.OnQueryTextListener {
+class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
 
 
@@ -52,7 +52,9 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter, SearchVie
         recyclerView.layoutManager = GridLayoutManager(this, 3)
 
 
-        adapter = DataAdapter( ArrayList(),this,this)
+        adapter = DataAdapter( ArrayList()){ position:Int , com->
+            clicked(position,com)
+        }
         recyclerView.adapter = adapter
     }
 
@@ -112,8 +114,8 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter, SearchVie
         Toast.makeText(this,"API failed",Toast.LENGTH_LONG).show()
     }
 
-    override fun clicked(position: Int) {
-        Toast.makeText(this,"Clicked position $position",Toast.LENGTH_LONG).show()
+     fun clicked(position: Int, companyDetail: CompanyDetails) {
+        Toast.makeText(this,"Clicked position $position ${companyDetail.name}",Toast.LENGTH_LONG).show()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
