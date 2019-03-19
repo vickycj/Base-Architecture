@@ -6,4 +6,6 @@
     <string name="newString">NEW</string>
     <string name="spectrum">Spectrum</string>
     <string name="spectrum_string">SPECTRUM</string>
+    <string name="search">Search</string>
+    <string name="search_company">Search Company</string>
 </resources>

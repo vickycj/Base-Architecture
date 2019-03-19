@@ -28,6 +28,7 @@ class MainViewModel(private val repository: Repository,
     private lateinit var responseData:List<ResponseData>
 
     private var companyDetails:MutableList<CompanyDetails> = ArrayList()
+
     private var ascendingVal:Boolean = false
 
     fun setCompositeData(compositeDisposable: CompositeDisposable) {
@@ -79,6 +80,13 @@ class MainViewModel(private val repository: Repository,
             }.toMutableList()
              ascendingVal=  false
         }
+    }
+
+     fun filterCompany(text:String?): List<CompanyDetails>{
+         if(text == null) return companyDetails
+        return ArrayList(companyDetails).filter {
+            it.name.startsWith(text.capitalize())
+        }.toMutableList()
     }
 
 
