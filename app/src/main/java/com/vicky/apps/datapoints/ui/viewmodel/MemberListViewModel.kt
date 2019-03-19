@@ -51,4 +51,14 @@ class MemberListViewModel(private val repository: Repository,
         }
 
     }
+
+    fun filterMember(newText: String?): List<Member> {
+        if(newText == null) return getMemberData()
+        val text = newText.toUpperCase()
+
+       return ArrayList(memberList).filter {
+            it.name.first.toUpperCase().startsWith(text) || it.name.last.toUpperCase().startsWith(text)
+        }.toMutableList()
+
+    }
 }
