@@ -77,7 +77,7 @@ class MemberListActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
         viewModel.setMemberData(responseData.members)
 
-        Picasso.get().load("https://name").placeholder(R.drawable.logo)
+        Picasso.get().load(responseData.logo).placeholder(R.drawable.logo)
             .error(R.drawable.logo)
             .into(logoImage)
 

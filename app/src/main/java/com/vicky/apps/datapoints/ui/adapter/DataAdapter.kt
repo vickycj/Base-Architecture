@@ -30,7 +30,7 @@ class DataAdapter constructor(var companyDetails: List<CompanyDetails>, val clic
         holder.childHeadView.setOnClickListener{
             clickListener(position,companyDetails[position])
         }
-       Picasso.get().load("https://name").
+       Picasso.get().load(companyDetails[position].logo).
            placeholder(R.drawable.logo).
            error(R.drawable.logo)
            .into(holder.logoImage)
