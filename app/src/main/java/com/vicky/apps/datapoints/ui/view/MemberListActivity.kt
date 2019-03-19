@@ -1,24 +1,24 @@
 package com.vicky.apps.datapoints.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import com.vicky.apps.datapoints.R
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.base.AppConstants.COMPANY_DATA_BUNDLE
+import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.common.ViewModelProviderFactory
 import com.vicky.apps.datapoints.ui.model.ResponseData
 import com.vicky.apps.datapoints.ui.viewmodel.MemberListViewModel
 import kotlinx.android.synthetic.main.activity_member_list.*
 import javax.inject.Inject
 
-class MemberListActivity : AppCompatActivity() {
+class MemberListActivity : BaseActivity() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-  //  private lateinit var viewModel:MemberListViewModel
+    private lateinit var viewModel:MemberListViewModel
 
     private lateinit var responseData: ResponseData
 
@@ -39,7 +39,7 @@ class MemberListActivity : AppCompatActivity() {
     }
 
     private fun initializeValues() {
-        //viewModel = ViewModelProviders.of(this, factory).get(MemberListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(MemberListViewModel::class.java)
 
 
         Picasso.get().load("https://name").placeholder(R.drawable.logo)
