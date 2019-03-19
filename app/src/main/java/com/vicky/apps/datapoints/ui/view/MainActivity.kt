@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(), RecyclerViewClickListenerAdapter {
         setContentView(com.vicky.apps.datapoints.R.layout.activity_main)
 
 
-        inilializingRecyclerView()
+        //inilializingRecyclerView()
         initializeValues()
 
     }
