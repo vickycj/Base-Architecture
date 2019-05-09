@@ -4,8 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vicky.apps.datapoints.common.SchedulerProvider
 import com.vicky.apps.datapoints.data.remote.Repository
-import com.vicky.apps.datapoints.ui.model.CompanyDetails
-import com.vicky.apps.datapoints.ui.model.ResponseData
 
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
