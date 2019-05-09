@@ -1,2 +1,2 @@
-# albumsList
-Showcase a List of albums
+# Base Android Architecture
+
