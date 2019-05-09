@@ -69,6 +69,12 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
 
 
+    // Room components
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "android.arch.persistence.room:runtime:$rootProject.architectureComponentsVersion"
@@ -77,6 +83,10 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"

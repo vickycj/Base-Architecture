@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
 
 
 
-        viewModel.getDataFromRemote()
+       // viewModel.getDataFromRemote()
     }
 
     private fun sortAndUpdateData() {
