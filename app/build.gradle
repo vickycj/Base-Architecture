@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.vicky.apps.datapoints"
-        minSdkVersion rootProject.targetSdkVersion
+        minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,7 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -54,18 +55,17 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    //Life Cycle libs
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycle_version"
-    // For Kotlin use lifecycle-viewmodel-ktx
-
     implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
-    // For Kotlin use kapt instead of annotationProcessor
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-service:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-process:$rootProject.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$rootProject.lifecycle_version"
-    // For Kotlin use lifecycle-reactivestreams-ktx
-    testImplementation "androidx.arch.core:core-testing:$rootProject.lifecycle_version"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.arch_version"
 
 
     // Room components

@@ -38,7 +38,7 @@ class MainViewModel(private val repository: Repository,
         compositeDisposable.add(generateApiCall().subscribeBy ( onSuccess = {
             response.postValue(true)
         }, onError = {
-            Log.d("valuessss",it.message)
+            it.message?.let { it1 -> Log.d("valuessss", it1) }
         } ))
 
 
