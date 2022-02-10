@@ -1,6 +1,6 @@
 package com.vicky.apps.datapoints.ui.view
+
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -9,17 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.common.ViewModelProviderFactory
 import com.vicky.apps.datapoints.ui.adapter.DataAdapter
-
 import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
-import android.text.TextUtils
-import android.view.MenuItem
-import android.widget.SearchView
-import com.vicky.apps.datapoints.base.AppConstants
 
 
 class MainActivity : BaseActivity() {

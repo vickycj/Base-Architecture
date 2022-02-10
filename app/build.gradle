@@ -65,6 +65,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-service:$rootProject.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-process:$rootProject.lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$rootProject.arch_version"
 
 
